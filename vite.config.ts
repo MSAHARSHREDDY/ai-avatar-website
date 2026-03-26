@@ -8,7 +8,8 @@ export default defineConfig(({ mode }) => ({
   server: {
     proxy: {
       "/api": {
-        target: "https://ai-avatar-website-backend.onrender.com/",
+        target: "https://ai-avatar-website-backend.onrender.com/api",
+        // target: "http://localhost:5001",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "")
       }
