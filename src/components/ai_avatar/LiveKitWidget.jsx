@@ -100,7 +100,7 @@ const LiveKitWidget = ({ setShowSupport }) => {
       }
 
       // ✅ FIX: Parse JSON correctly
-      const data = await response.json();
+      const data = await response.text();
 
       setToken(data.token);
       setIsConnecting(false);
