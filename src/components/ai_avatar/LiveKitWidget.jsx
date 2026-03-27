@@ -364,21 +364,50 @@ const LiveKitWidget = ({ setShowSupport }) => {
   const [token, setToken] = useState(null);
   const [isConnecting, setIsConnecting] = useState(true);
 
-  const getToken = useCallback(async () => {
-    try {
-      console.log("run");
-      const response = await fetch(
-        `/api/getToken?name=${encodeURIComponent("admin")}`
-      );
-      const token = await response.text();
+  // const getToken = useCallback(async () => {
+  //   try {
+  //     console.log("run");
+  //     const response = await fetch(
+  //       `/api/getToken?name=${encodeURIComponent("admin")}`
+  //     );
+  //     const token = await response.text();
       
-      setToken(token);
-      setIsConnecting(false);
-    } catch (error) {
-      console.error(error);
-      setIsConnecting(false);
+  //     setToken(token);
+  //     setIsConnecting(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //     setIsConnecting(false);
+  //   }
+  // }, []);
+  const getToken = useCallback(async () => {
+  try {
+    console.log("Fetching token...");
+
+    // ✅ FIX: dynamic API URL
+    const API_URL =
+      import.meta.env.MODE === "development"
+        ? "/api"
+        : "https://ai-avatar-website-backend.onrender.com";
+
+    const roomName = "test-room"; // must match agent
+
+    const response = await fetch(
+      `${API_URL}/getToken?name=${encodeURIComponent("admin")}&room=${roomName}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch token");
     }
-  }, []);
+
+    const token = await response.text();
+
+    setToken(token);
+    setIsConnecting(false);
+  } catch (error) {
+    console.error("Token fetch error:", error);
+    setIsConnecting(false);
+  }
+}, []);
 
   useEffect(() => {
     getToken();
