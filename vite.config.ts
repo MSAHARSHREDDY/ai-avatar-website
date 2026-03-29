@@ -72,7 +72,7 @@ export default defineConfig(({ mode }) => {
       __API_URL__: JSON.stringify(
         isDev
           ? "/api"
-          : "https://ai-avatar-website-backend.onrender.com"
+          : "https://ai-avatar-backend-vmja.onrender.com"
       ),
       __LIVEKIT_URL__: JSON.stringify(
         "wss://your-project.livekit.cloud"

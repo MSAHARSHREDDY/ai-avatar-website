@@ -387,7 +387,7 @@ const LiveKitWidget = ({ setShowSupport }) => {
     const API_URL =
       import.meta.env.MODE === "development"
         ? "/api"
-        : "https://ai-avatar-website-backend.onrender.com";
+        : "https://ai-avatar-backend-vmja.onrender.com";
 
     const roomName = "test-room"; // must match agent
 
